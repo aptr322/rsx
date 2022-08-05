@@ -31,14 +31,13 @@ fn t_2() {
 
     let url = Url::parse(p).unwrap();
 
-    println!("{:?}  {}", url, url.domain().unwrap());
+    println!("{:?}  {:?}  {:?}", url, url.domain().unwrap(), Some(url.path()));
     print_type_of(&url.path());
 }
 
 #[test]
 fn t_3() {
     let v1 = (0..25).step_by(7).collect::<Vec<_>>();
-
     for c in v1 {
         println!("{:?}", c);
     }
@@ -65,6 +64,28 @@ fn t_4() {
     } else {
         v.iter().map(|v| v.to_string()).rev().collect()
     };
-    
+
+    let l = v1.len();
+
+    dbg!(std::cmp::max(0, l as i32 - 4));
     println!("{:?}", &v1);
+}
+
+#[test]
+fn t_5() {
+    use regex::Regex;
+    let seps = Regex::new("[+/=_\\-)(]").unwrap();
+
+    let p = "/a/ch-c/americas-most-(well)-known+first=ladies-ranked/";
+
+    let words: Vec<_> = seps.split(p).into_iter().filter(|x| !x.is_empty()).collect();
+
+    for w in words {
+        print_type_of(&w);
+        println!("{:?}", &w);
+    }
+}
+
+#[test]
+fn t_6() {
 }
