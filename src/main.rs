@@ -1,19 +1,29 @@
+use clap::Parser;
+#[allow(unused_imports)]
 use url::Url;
 
 pub fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
 }
 
+#[derive(Parser)]
+#[clap(author, version, about, long_about = None)]
+struct Cli {
+    #[clap(short, long, default_value_t = false)]
+    domains: bool,
+
+    #[clap(value_parser)]
+    source_dir: String,
+
+    #[clap(value_parser)]
+    output_dir: String,
+
+}
+
 fn main() {
+    let cli = Cli::parse();
 
-    let prefx = &["www.", "www1.", "www2.", "l.", "m.", "lm."];
-
-    for p in prefx {
-        println!("{}", &p);
-        if "www1.aaaa".starts_with(p) {
-            break;
-        }
-    }
+    println!("{} {} {}",&cli.domains, &cli.source_dir, &cli.output_dir);
 }
 
 
@@ -42,7 +52,7 @@ fn t_3() {
         println!("{:?}", c);
     }
 }
-
+#[allow(dead_code)]
 fn contains(w: &str, discarded: &Vec<&str>) -> bool {
     for d in discarded {
         if *d == w {
