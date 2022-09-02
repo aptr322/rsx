@@ -1,4 +1,3 @@
-use clap::Parser;
 #[allow(unused_imports)]
 use url::Url;
 
@@ -6,24 +5,9 @@ pub fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
 }
 
-#[derive(Parser)]
-#[clap(author, version, about, long_about = None)]
-struct Cli {
-    #[clap(short, long, default_value_t = false)]
-    domains: bool,
-
-    #[clap(value_parser)]
-    source_dir: String,
-
-    #[clap(value_parser)]
-    output_dir: String,
-
-}
 
 fn main() {
-    let cli = Cli::parse();
-
-    println!("{} {} {}",&cli.domains, &cli.source_dir, &cli.output_dir);
+    println!("^^^");
 }
 
 
@@ -98,4 +82,32 @@ fn t_5() {
 
 #[test]
 fn t_6() {
+    use regex::Regex;
+    let re1 = Regex::new(r"\w\.htm.?$").unwrap();
+
+    println!("{:?}", re1.is_match("aaa.htm"));
+
+    let re2 = Regex::new(r"\d+").unwrap();
+    println!("{:?}", re2.is_match("aaaaa1"));
+    println!("{:?}", re2.is_match("123_"));
+
+    let re3 = Regex::new(r"^((\w+).)*(\w+)$").unwrap();
+    println!("{:?}", re3.is_match("aaa-a.b1.com"));
+}
+
+
+use std::any::Any;
+fn is_string(s: &(dyn Any + Send)) -> bool {
+    s.is::<String>()
+}
+
+#[test]
+fn t_7() {
+    use std::str::FromStr;
+    let v = u64::from_str("124").unwrap();
+    println!("0x{:08x} {}", v, is_string(&v));
+
+    let v = u64::from(true);
+    println!("{:?}", v);
+
 }
