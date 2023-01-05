@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
 use url::Url;
 
-mod def;
+mod nv;
 
 pub fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
@@ -11,6 +11,10 @@ pub fn print_type_of<T>(_: &T) {
 fn main() {
     println!("^^^");
     dbg!(nv::new_nv());
+
+    let mut v = nv::NamedVal::new("aaaa", 20);
+    // v.v = 21;
+    dbg!(v);
 }
 
 
@@ -126,3 +130,7 @@ fn t_8() {
     println!("{}", o);
 }
 
+#[test]
+fn t_9() {
+    println!("{}", rand::random::<f64>());
+}
