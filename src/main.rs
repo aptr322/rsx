@@ -1,6 +1,8 @@
 #[allow(unused_imports)]
 use url::Url;
 
+mod def;
+
 pub fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
 }
@@ -8,6 +10,7 @@ pub fn print_type_of<T>(_: &T) {
 
 fn main() {
     println!("^^^");
+    dbg!(nv::new_nv());
 }
 
 
@@ -111,3 +114,15 @@ fn t_7() {
     println!("{:?}", v);
 
 }
+
+#[test]
+fn t_8() {
+    // format!
+    let p1 = "p1";
+    let p2 = "p2";
+    let p3 = 10;
+    let o = format!("{p1}-{p2}-{p3}");
+
+    println!("{}", o);
+}
+
