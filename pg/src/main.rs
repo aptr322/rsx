@@ -9,12 +9,6 @@ pub fn print_type_of<T>(_: &T) {
 
 
 fn main() {
-    println!("^^^");
-    dbg!(nv::new_nv());
-
-    let mut v = nv::NamedVal::new("aaaa", 20);
-    // v.v = 21;
-    dbg!(v);
 }
 
 
@@ -104,7 +98,7 @@ fn t_6() {
 
 
 use std::any::Any;
-fn is_string(s: &(dyn Any + Send)) -> bool {
+pub fn is_string(s: &(dyn Any + Send)) -> bool {
     s.is::<String>()
 }
 
